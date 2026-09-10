@@ -20,4 +20,7 @@ public class Resume {
     private String extractedText;
 
     private LocalDateTime uploadedAt = LocalDateTime.now();
+
+    @Column(columnDefinition = "TEXT")
+    private String analysis;
 }

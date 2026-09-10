@@ -19,7 +19,7 @@ public class AnalysisService {
 
     public String analyzeResume(String resumeText) throws IOException{
         Map<String, Object> requestBody = Map.of(
-                "model", "llama-3.3-70b-versatile",
+                "model", "openai/gpt-oss-120b",
                 "max_tokens", 1024,
                 "messages", List.of(
                         Map.of("role", "user", "content", buildPrompt(resumeText))
