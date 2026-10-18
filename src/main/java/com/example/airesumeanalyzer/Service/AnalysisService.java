@@ -47,7 +47,7 @@ public class AnalysisService {
 
     private String buildPrompt(String resumeText){
         return """
-                You are an expect resume reviewer. Analyze the following resume and provide:
+                You are an expert resume reviewer. Analyze the following resume and provide:
                 
                 1. STRENGTHS: List 3-5 Key strengths
                 2. WEAKNESSES: List 3-5 areas for improvement

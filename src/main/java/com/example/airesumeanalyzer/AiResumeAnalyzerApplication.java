@@ -8,6 +8,6 @@ public class AiResumeAnalyzerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AiResumeAnalyzerApplication.class, args);
-        System.out.println("Resume Analyzer Online!");
+        System.out.println("Analyzer online!");
     }
 }

@@ -1,6 +1,5 @@
 package com.example.airesumeanalyzer.Controller;
 
-import com.example.airesumeanalyzer.Entity.AnalysisResult;
 import com.example.airesumeanalyzer.Entity.Resume;
 import com.example.airesumeanalyzer.Repository.ResumeRepository;
 import com.example.airesumeanalyzer.Service.AnalysisService;
@@ -33,24 +32,17 @@ public class ResumeController {
 
     @Transactional
     @PostMapping("/{id}/analyze")
-    public ResponseEntity<AnalysisResult> analyze(@PathVariable String id) throws IOException {
+    public ResponseEntity<String> analyze(@PathVariable String id) throws IOException {
         Resume resume = resumeRepository.findByIdNative(id).orElse(null);
 
         if (resume == null) {
             return ResponseEntity.notFound().build();
         }
 
-        if (resume.getAnalysis() != null && !resume.getAnalysis().isEmpty()) {
-            AnalysisResult analysisResult = new AnalysisResult(resume.getAnalysis(), true);
-            return ResponseEntity.ok(analysisResult);
-        }
-
         String analysis = analysisService.analyzeResume(resume.getExtractedText());
         resume.setAnalysis(analysis);
         resumeRepository.save(resume);
 
-        AnalysisResult analysisResult = new AnalysisResult(resume.getAnalysis(), false);
-
-        return ResponseEntity.ok(analysisResult);
+        return ResponseEntity.ok(analysis);
     }
 }
