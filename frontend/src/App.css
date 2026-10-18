@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f0f4f8;
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 20px;
+    min-height: 100vh;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 32px;
+}
+
+.upload-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #cbd5e0;
+    border-radius: 12px;
+    padding: 40px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    margin-bottom: 24px;
+    gap: 12px;
+    color: #666;
+}
+
+.upload-area:hover {
+    border-color: #6366f1;
+    color: #6366f1
+}
+
+.upload-icon {
+    font-size: 2.5rem;
+}
+
+.button {
+    width: 100%;
+    padding: 14px;
+    background: #6366f1;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.button:hover:not(.disabled) {
+    background: #4f46e5;
+}
+
+.button:disabled {
+    background: #a5b4fc;
+    cursor: not-allowed;
+}
+
+.analysis {
+    margin-top: 32px;
+    padding: 24px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.analysis h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin-bottom: 16px;
+}
+
+.analysis pre {
+    white-space: pre-wrap;
+    font-family: "Segoe UI", sans-serif;
+    color: #444;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
