@@ -23,16 +23,25 @@ function App() {
   }
 
   async function handleAnalyze(){
+      if (!file) return
       setLoading(true)
 
-      const analyzeResponse = await fetch(`http://localhost:8080/api/resume/${resumeId}/analyze`, {
-          method: 'POST',
-      })
+      try {
+          const formData = new FormData()
+          formData.append('file', file)
 
-      const result = await analyzeResponse.text();
-      setAnalysis(result)
-      console.log(result)
-      setLoading(false)
+          const analyzeResponse = await fetch(`http://localhost:8080/api/resume/analyze`, {
+              method: 'POST',
+              body: formData,
+          })
+
+          const result = await analyzeResponse.text();
+          setAnalysis(result)
+      } catch(err) {
+          console.error('Error:', err)
+      } finally {
+          setLoading(false)
+      }
   }
 
   return (
@@ -50,7 +59,7 @@ function App() {
         <span>{file ? file.name : 'Click to upload your PDF resume'}</span>
         </label>
 
-         <button className="button" onClick={handleAnalyze} disabled={!resumeId || loading}>
+         <button className="button" onClick={handleAnalyze} disabled={!file || loading}>
              {loading ? 'Analyzing...' : 'Analyze Resume'}
          </button>
 

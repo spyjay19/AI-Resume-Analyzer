@@ -1,10 +1,8 @@
 package com.example.airesumeanalyzer.Controller;
 
 import com.example.airesumeanalyzer.Entity.Resume;
-import com.example.airesumeanalyzer.Repository.ResumeRepository;
 import com.example.airesumeanalyzer.Service.AnalysisService;
 import com.example.airesumeanalyzer.Service.ResumeService;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,31 +16,17 @@ import java.io.IOException;
 public class ResumeController {
     private final ResumeService resumeService;
     private final AnalysisService analysisService;
-    private final ResumeRepository resumeRepository;
 
-    @PostMapping
-    public ResponseEntity<Resume> upload(@RequestParam("file") MultipartFile file) throws IOException {
+    @PostMapping("/analyze")
+    public ResponseEntity<String> upload(@RequestParam("file") MultipartFile file) throws IOException {
         String contentType = file.getContentType();
 
         if (contentType == null || !contentType.equals("application/pdf")) {
             return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok(resumeService.processResume(file));
-    }
 
-    @Transactional
-    @PostMapping("/{id}/analyze")
-    public ResponseEntity<String> analyze(@PathVariable String id) throws IOException {
-        Resume resume = resumeRepository.findByIdNative(id).orElse(null);
-
-        if (resume == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        String analysis = analysisService.analyzeResume(resume.getExtractedText());
-        resume.setAnalysis(analysis);
-        resumeRepository.save(resume);
-
+        String extractedText = resumeService.extractText(file);
+        String analysis = analysisService.analyzeResume(extractedText);
         return ResponseEntity.ok(analysis);
     }
 }
