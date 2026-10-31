@@ -3,9 +3,9 @@ import './App.css'
 
 function App() {
   const [file, setFile] = useState(null)
-    const [resumeId, setResumeId] = useState(null)
     const [analysis, setAnalysis] = useState('')
   const [loading, setLoading] = useState(false)
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080'
 
     async function handleUpload(selectedFile) {
     if (!selectedFile) return
@@ -30,7 +30,7 @@ function App() {
           const formData = new FormData()
           formData.append('file', file)
 
-          const analyzeResponse = await fetch(`http://localhost:8080/api/resume/analyze`, {
+          const analyzeResponse = await fetch(`${API_URL}/api/resume/analyze`, {
               method: 'POST',
               body: formData,
           })
