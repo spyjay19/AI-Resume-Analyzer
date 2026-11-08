@@ -1,4 +1,4 @@
-const ENDPOINT = 'https://ai-resume-analyzer-1-mnha.onrender.com';
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwO880vNoSaOKTCM_gyY9JKqjKFOeAz6kZjoG0NdcAum40l15tvfl0XrcCpaYiqdEe1/exec';
 const VISITOR_KEY = 'vl_visitor_id';
 const SESSION_KEY = 'vl_session';
 
